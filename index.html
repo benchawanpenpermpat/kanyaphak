@@ -1,0 +1,204 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Untitled Document</title>
+<style type="text/css">
+<!--
+body {
+	font: 100%/1.4 Verdana, Arial, Helvetica, sans-serif;
+	background-color: #42413C;
+	margin: 0;
+	padding: 0;
+	color: #000;
+}
+/* ~~ Element/tag selectors ~~ */
+ul, ol, dl { /* Due to variations between browsers, it's best practices to zero padding and margin on lists. For consistency, you can either specify the amounts you want here, or on the list items (LI, DT, DD) they contain. Remember that what you do here will cascade to the .nav list unless you write a more specific selector. */
+	padding: 0;
+	margin: 0;
+}
+h1, h2, h3, h4, h5, h6, p {
+	margin-top: 0;	 /* removing the top margin gets around an issue where margins can escape from their containing block. The remaining bottom margin will hold it away from any elements that follow. */
+	padding-right: 15px;
+	padding-left: 15px; /* adding the padding to the sides of the elements within the blocks, instead of the block elements themselves, gets rid of any box model math. A nested block with side padding can also be used as an alternate method. */
+	background-color: #FFF;
+}
+a img { /* this selector removes the default blue border displayed in some browsers around an image when it is surrounded by a link */
+	border: none;
+}
+/* ~~ Styling for your site's links must remain in this order - including the group of selectors that create the hover effect. ~~ */
+a:link {
+	color: #42413C;
+	text-decoration: underline; /* unless you style your links to look extremely unique, it's best to provide underlines for quick visual identification */
+}
+a:visited {
+	color: #6E6C64;
+	text-decoration: underline;
+}
+a:hover, a:active, a:focus { /* this group of selectors will give a keyboard navigator the same hover experience as the person using a mouse. */
+	text-decoration: none;
+}
+/* ~~ This fixed width container surrounds all other blocks ~~ */
+.container {
+	width: 960px;
+	background-color: #FF0099;
+	margin: 0 auto; /* the auto value on the sides, coupled with the width, centers the layout */
+}
+/* ~~ The header is not given a width. It will extend the full width of your layout. ~~ */
+header {
+	background-color: #ADB96E;
+}
+/* ~~ These are the columns for the layout. ~~ 
+
+1) Padding is only placed on the top and/or bottom of the block elements. The elements within these blocks have padding on their sides. This saves you from any "box model math". Keep in mind, if you add any side padding or border to the block itself, it will be added to the width you define to create the *total* width. You may also choose to remove the padding on the element in the block element and place a second block element within it with no width and the padding necessary for your design.
+
+2) No margin has been given to the columns since they are all floated. If you must add margin, avoid placing it on the side you're floating toward (for example: a right margin on a block set to float right). Many times, padding can be used instead. For blocks where this rule must be broken, you should add a "display:inline" declaration to the block element's rule to tame a bug where some versions of Internet Explorer double the margin.
+
+3) Since classes can be used multiple times in a document (and an element can also have multiple classes applied), the columns have been assigned class names instead of IDs. For example, two sidebar blocks could be stacked if necessary. These can very easily be changed to IDs if that's your preference, as long as you'll only be using them once per document.
+
+4) If you prefer your nav on the left instead of the right, simply float these columns the opposite direction (all left instead of all right) and they'll render in reverse order. There's no need to move the blocks around in the HTML source.
+
+*/
+.sidebar1 {
+	float: left;
+	width: 180px;
+	background-color: #EADCAE;
+	padding-bottom: 10px;
+}
+.content {
+	padding: 10px 0;
+	width: 600px;
+	float: left;
+}
+aside {
+	float: left;
+	width: 180px;
+	background-color: #EADCAE;
+	padding: 10px 0;
+}
+
+/* ~~ This grouped selector gives the lists in the .content area space ~~ */
+.content ul, .content ol {
+	padding: 0 15px 15px 40px; /* this padding mirrors the right padding in the headings and paragraph rule above. Padding was placed on the bottom for space between other elements on the lists and on the left to create the indention. These may be adjusted as you wish. */
+}
+
+/* ~~ The navigation list styles (can be removed if you choose to use a premade flyout menu like Spry) ~~ */
+ul.nav {
+	list-style: none; /* this removes the list marker */
+	border-top: 1px solid #666; /* this creates the top border for the links - all others are placed using a bottom border on the LI */
+	margin-bottom: 15px; /* this creates the space between the navigation on the content below */
+}
+ul.nav li {
+	border-bottom: 1px solid #666; /* this creates the button separation */
+}
+ul.nav a, ul.nav a:visited { /* grouping these selectors makes sure that your links retain their button look even after being visited */
+	padding: 5px 5px 5px 15px;
+	display: block; /* this gives the link block properties causing it to fill the whole LI containing it. This causes the entire area to react to a mouse click. */
+	width: 160px;  /*this width makes the entire button clickable for IE6. If you don't need to support IE6, it can be removed. Calculate the proper width by subtracting the padding on this link from the width of your sidebar container. */
+	text-decoration: none;
+	background-color: #C6D580;
+}
+ul.nav a:hover, ul.nav a:active, ul.nav a:focus { /* this changes the background and text color for both mouse and keyboard navigators */
+	background-color: #ADB96E;
+	color: #FFF;
+}
+
+/* ~~ The footer ~~ */
+footer {
+	padding: 10px 0;
+	background-color: #CCC49F;
+	position: relative;/* this gives IE6 hasLayout to properly clear */
+	clear: both; /* this clear property forces the .container to understand where the columns end and contain them */
+}
+/* ~~ Miscellaneous float/clear classes ~~ */
+.fltrt {  /* this class can be used to float an element right in your page. The floated element must precede the element it should be next to on the page. */
+	float: right;
+	margin-left: 8px;
+}
+.fltlft { /* this class can be used to float an element left in your page. The floated element must precede the element it should be next to on the page. */
+	float: left;
+	margin-right: 8px;
+}
+.clearfloat { /* this class can be placed on a <br /> or empty block element as the final element following the last floated block (within the .container) if the footer is removed or taken out of the .container */
+	clear:both;
+	height:0;
+	font-size: 1px;
+	line-height: 0px;
+}
+
+/*HTML 5 support - Sets new HTML 5 tags to display:block so browsers know how to render the tags properly. */
+header, section, footer, aside, article, figure {
+	display: block;
+}
+-->
+</style><!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]--></head>
+
+<body>
+
+<div class="container">
+  <header>
+    <a href="#"><img src="" alt="Insert Logo Here" width="180" height="90" id="Insert_logo" style="background-color: #C6D580; display:block;" /></a>
+    <table width="100%" border="0">
+      <tr>
+        <td width="16%"><a href="#"><img src="image/logo.jpg" width="150" height="150"></a></td>
+        <td width="84%"><img src="image/banner.jpg" width="805" height="150"></td>
+      </tr>
+    </table>
+  </header>
+  <div class="sidebar1">
+    <ul class="nav">
+      <li><a href="s.html">S คือ</a></li>
+      <li><a href="t.html">T คือ</a></li>
+      <li><a href="e.html">E คือ</a></li>
+      <li><a href="m.html">M คือ</a></li>
+    </ul>
+    <aside></aside>
+  <!-- end .sidebar1 --></div>
+  <article class="content">
+    <h1>ผู้จัดทำ</h1>
+    <h2>ด.ญ.กัญญาภัค เดชประทุม เลขที่ 20 ป.6/1    </h2>
+    <h1>SCIENCE</h1>
+    <section>
+     <h2>วิทยาศาสตร์ หมายถึง </h2>
+      <h2> ความรู้เกี่ยวกับสิ่งต่าง ๆ ในธรรมชาติทั้งที่มีชีวิตและไม่มีชีวิต รวมทั้งกระบวนการประมวล<a href="https://th.wikipedia.org/wiki/%E0%B8%84%E0%B8%A7%E0%B8%B2%E0%B8%A1%E0%B8%A3%E0%B8%B9%E0%B9%89%E0%B9%80%E0%B8%8A%E0%B8%B4%E0%B8%87%E0%B8%9B%E0%B8%A3%E0%B8%B0%E0%B8%88%E0%B8%B1%E0%B8%81%E0%B8%A9%E0%B9%8C" title="ความรู้เชิงประจักษ์">ความรู้เชิงประจักษ์</a>ที่เรียกว่า<a href="https://th.wikipedia.org/wiki/%E0%B8%A3%E0%B8%B0%E0%B9%80%E0%B8%9A%E0%B8%B5%E0%B8%A2%E0%B8%9A%E0%B8%A7%E0%B8%B4%E0%B8%98%E0%B8%B5%E0%B9%81%E0%B8%9A%E0%B8%9A%E0%B8%A7%E0%B8%B4%E0%B8%97%E0%B8%A2%E0%B8%B2%E0%B8%A8%E0%B8%B2%E0%B8%AA%E0%B8%95%E0%B8%A3%E0%B9%8C" title="ระเบียบวิธีแบบวิทยาศาสตร์">กระบวนการทางวิทยาศาสตร</a>และกลุ่มขององค์ความรู้ที่ได้จากกระบวนการ</h2>
+      <h1>หลักการทาง วิทยาศาสตร์ </h1>
+      <h1>STEM</h1>
+      <h2>S ย่อมากจาก Science หรือ วิทยาศสตร์</h2>
+      <h2>T ย่อมาจาก Technology หรือ เทคโนโลยี</h2>
+      <h2>E ย่อมาจาก Engineer  หรือ วิศวกรรม</h2>
+      <h2>M ย่อมาจาก Math หรือ คณิตศาสตร์</h2>
+      <h1>ขั้นตอนทางวิทยาศาสตร์ มี 5 ขั้นตอน</h1>
+      <h2>1.<strong>สังเกตและระบุปัญหา </strong></h2>
+      <h2>2.<strong>ตั้งสมมุติฐาน</strong></h2>
+      <h2>3.<strong>ทำการทดลองหรือทดสอบสมมติฐาน</strong></h2>
+      <h2>4.<strong>เก็บรวบรวมข้อมูลและวิเคราะห์ข้อมูล</strong></h2>
+      <h2>5.<strong>สรุปผลการทดลอง</strong></h2>
+      <pre>&nbsp;</pre>
+    </section>
+    <section>
+      <h2>ลมบก ลมทะเล (เรื่องที่เลือกมายกตัวอย่าง)</h2>
+      <h2>ลมบก ลมทะเล หรือ มีอีกชื่อคือ ลมประจำถิ่น ลมประจำเวลา</h2>
+      <p><img src="image/11243-1.jpg" width="550" height="260"></p>
+    </section>
+    <section>
+      <h2>ลมบก land breez</h2>
+      <p><img src="image/shutterstock_ลมบกและลมทะเล 3.jpg" width="584" height="200"></p>
+      <h2>ลมบกเป็นลมที่เกิดขึ้นในตอนกลางคืน โดยลมบกนั้นจะมีการเกิดที่ตรงกันข้ามกับลมทะเล คือ ในตอนกลางคืนพื้นดินสามารถคายความร้อนได้ดีกว่าพื้นน้ำ ทำให้อากาศบริเวณพื้นดินมีอุณหภูมิต่ำกว่าพื้นน้ำทะเล ดังนั้น อากาศจึงเย็นกว่าและมีความกดอากาศสูงกว่า ขณะที่พื้นน้ำซึ่งคายความร้อนได้ช้ากว่าพื้นดินมีอุณหภูมิสูงกว่า อากาศมีความหนาแน่นน้อยกว่า จึงลอยตัวขึ้นสูง และอากาศเย็นจากพื้นดินเคลื่อนเข้าแทนที่ ทำให้เกิดลมบก ซึ่งเป็นลมที่เกิดจากการพัดจากชายฝั่งไปยังทะเลนั่นเอง      </h2>
+      <h2>ลมทะเล sea breez</h2>
+      <p><img src="image/shutterstock_ลมบกและลมทะเล 02.jpg" width="548" height="200"></p>
+      <h2>ตามหลักการเคลื่อนที่ของลมนั้น จะมีการเคลื่อนที่ของอากาศบริเวณที่มีความกดอากาศสูง (อุณหภูมิต่ำ) ไปยังบริเวณที่มีความกดอากาศต่ำกว่า (อุณหภูมิสูง) ซึ่งลมทะเลก็มีลักษณะของการเคลื่อนที่ตามหลักการดังกล่าวเช่นกัน โดยลมทะเลมักเกิดขึ้นในเวลาบ่ายหรือเย็น เนื่องจากตอนกลางวัน พื้นดินได้รับแสงแดด ทำให้มีการสะสมความร้อนเอาไว้ เมื่ออากาศร้อนเหนือพื้นดินมีอุณหภูมิสูง ความกดอากาศและความหนาแน่นต่ำ ทำให้อากาศเกิดการลอยตัวขึ้นสูง อากาศบริเวณทะเลเป็นอากาศเย็นจมตัวลงพัดเข้ามาแทนที่พื้นที่ที่บริเวณพื้นดิน</h2>
+      <h2>ที่มีอุณหภูมิสูงและมีความกดอากาศต่ำกว่า ดังนั้น ลมทะเลจึงเป็นลมที่พัดมาจากทะเลเข้าสู่ฝั่งนั่นเอง</h2>
+    </section>
+  <!-- end .content --></article>
+  <p>&nbsp;</p>
+  <aside></aside>
+  <footer>
+    <h1>Kanyaphak Dechpratoom No.20 P.6/1</h1>
+    <address>
+    </address>
+  </footer>
+  <!-- end .container --></div>
+</body>
+</html>
